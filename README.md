@@ -11,3 +11,8 @@ You can directly control the camera or motor through the USB COM port, and send 
    - An RS-232 port (or USB / RS-232 converter)
    - An RS232 / RS485 converter
 2) Make sure your COM port settings in the 232Analyzer program matches with camera's settings (Pelco-D cameras use No parity, 8 Data bits and 1 Stop bit, baud rate depends on your camera setting)
+
+The driver class is in
+```
+camera_action.h and camera_action.cpp
+```
