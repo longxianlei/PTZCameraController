@@ -23,6 +23,12 @@ main.cpp
 ```
 
 1) The format of Pelco-D (pelcod)
+
+## The control format of Pelco-D protocol
+
+###
+![pelco_d_format](pelco_d_format.png)
+
 Pelco-D consists of 7 hexadecimal bytes (all byte data used in this page are in Hexadecimal format unless otherwise specified).
 
 Byte 1	Byte 2	Byte 3	Byte 4	Byte 5	Byte 6	Byte 7
