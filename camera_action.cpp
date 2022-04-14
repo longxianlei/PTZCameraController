@@ -7,7 +7,6 @@ CameraAction::CameraAction()
 {
 	//BYTE byDbytes[] = {0xFF, 0, 0, 0, 0, 0, 0,	0};	//plus one more byte for convernice
 	//BYTE byPbytes[] = {0xA0, 0, 0, 0, 0, 0, 0xAF, 0};
-
 	// here, we use Pelco-D protocol bytes.
 	for (int i = 0; i < PELCO_P_SIZE; i++)
 	{
@@ -17,13 +16,11 @@ CameraAction::CameraAction()
 	pDbytes[0] = 0xFF;
 	pPbytes[0] = 0xA0;
 	pPbytes[6] = 0xAF;
-
+	
 	// select Pelco-D by default.
 	this->setPelcoD();
-
-	// set 0 addr by default
+	// set 0 addr by default.
 	this->setAddress(1);
-
 }
 
 CameraAction::~CameraAction()
@@ -38,8 +35,7 @@ BOOL CameraAction::openCamera(int com_port)
 	portnum = "COM" + to_string(com_port);
 	hComm = CreateFileA(portnum.c_str(), GENERIC_READ | GENERIC_WRITE,
 		0, NULL, OPEN_EXISTING, 0, NULL);
-
-
+	
 	if (hComm == (HANDLE)-1)
 	{
 		cout << "Connect PTZ motor failed!" << endl;
@@ -52,21 +48,18 @@ BOOL CameraAction::openCamera(int com_port)
 		return FALSE;
 	}
 
-	SetupComm(hComm, 100, 100);//设置输入输出缓冲区为100
+	SetupComm(hComm, 100, 100);// set the buffer length for 100 
 
 	COMMTIMEOUTS TimeOuts;
-	//设定读超时,在读一次输入缓冲区的内容后读操作就立即返回，不管是否读入了要求的字符。
+	// set read timeout.
 	TimeOuts.ReadIntervalTimeout = MAXDWORD;
 	TimeOuts.ReadTotalTimeoutMultiplier = 0;
 	TimeOuts.ReadTotalTimeoutConstant = 0;
-
-	//设定写超时
+	// write timeout.
 	TimeOuts.WriteTotalTimeoutMultiplier = 100;
 	TimeOuts.ReadTotalTimeoutConstant = 500;
-
-	SetCommTimeouts(hComm, &TimeOuts);//设置超时
-
-
+	// set timeout.
+	SetCommTimeouts(hComm, &TimeOuts);
 
 	DCB dcbSerialParams = { 0 };
 	dcbSerialParams.DCBlength = sizeof(dcbSerialParams);
